@@ -4,7 +4,8 @@ class Victim < ActiveRecord::Base
 	require "uri"
 
 	@@graph = Koala::Facebook::API.new
-
+	
+	# Gets facebook information from an entered facebook url
 	def self.authenticate_victim(facebook_url)
 		# @graph = Koala::Facebook::API.new
 		@facebook_url = facebook_url
@@ -13,7 +14,8 @@ class Victim < ActiveRecord::Base
 		@facebook_profile_name = @facebook_profile_name_with_slash.gsub(/\//, '')
 		return @@graph.get_object(@facebook_profile_name)
 	end
-
+	
+	# Grabs the profile picture of a "victim" from their public facebook information
 	def find_profile_photo
 		# @graph = Koala::Facebook::API.new
 		@user_id = self.facebook_id
